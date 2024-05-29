@@ -18,6 +18,7 @@ return new class extends Migration
                 $table->string('wage');
                 $table->text('description');
                 $table->timestamps();
+                //Tạo khóa chính ở migrations khác
             });
         }
     }
