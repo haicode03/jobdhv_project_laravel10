@@ -11,11 +11,7 @@
             <a href="/" class="nav-item nav-link active">Trang chủ</a>
             
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Công việc</a>
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="/jobs" class="dropdown-item">Danh sách công việc</a>
-                    <a href="job-detail.html" class="dropdown-item">Chi tiết công việc</a>
-                </div>
+                <a href="/jobs" class="nav-item nav-link">Công việc</a>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -27,11 +23,11 @@
             </div>
             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login</a>
-                <div class="dropdown-menu rounded-0 m-0">
+                <a href="/login" class="nav-item nav-link">Login</a>
+                {{-- <div class="dropdown-menu rounded-0 m-0">
                     <a href="/login_employer" class="dropdown-item">Nhà tuyển dụng</a>
                     <a href="/login_candidate" class="dropdown-item">Ứng tuyển viên</a>
-                </div>
+                </div> --}}
             </div>
         </div>
         <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng tuyển<i class="fa fa-arrow-right ms-3"></i></a>

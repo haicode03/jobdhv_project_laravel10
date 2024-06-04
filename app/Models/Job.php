@@ -27,9 +27,9 @@ class Job extends Model
 
     // protected $fillable = ['title', 'wage', 'description'];
     // //a job belongs to a category
-    // public function detail_job() {
-    //     return $this->hasOne(Detail_job::class);
-    // }
+    public function detail_job() {
+        return $this->hasOne(Detail_job::class);
+    }
 
     public function category() {
         return $this->belongsTo(Category::class);

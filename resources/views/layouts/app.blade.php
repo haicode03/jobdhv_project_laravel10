@@ -26,12 +26,10 @@
     <link rel="stylesheet" href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}">
 
     <!-- Customized Bootstrap Stylesheet -->
-    {{-- <link href="css/bootstrap.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     
 
     <!-- Template Stylesheet -->
-    {{-- <link href="css/style.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 

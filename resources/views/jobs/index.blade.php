@@ -71,7 +71,7 @@
                         </div>
                     @endforeach
                     
-                    <a class="btn btn-primary py-3 px-5" href="jobs/create">Thêm công việc</a>
+                    <a class="btn btn-primary py-3 px-5" href="jobs/create">Hiển thị thêm</a>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
                     <div class="job-item p-4 mb-4">
