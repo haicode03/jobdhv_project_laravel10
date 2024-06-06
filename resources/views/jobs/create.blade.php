@@ -29,9 +29,9 @@
                     <input class="form-control" type="text" name="wage" placeholder="Nhập mức lương">
                     <input class="form-control" type="text" name="description" placeholder="Nhập mô tả công việc">
                         <div>
-                            <label>Choose a categories_job:</label>
+                            <label>Choose a categories:</label>
                             <select name="category_id">
-                                @foreach ($categories_job as $category)
+                                @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">
                                         {{ $category->name }}
                                     </option>

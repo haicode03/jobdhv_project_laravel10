@@ -19,6 +19,10 @@ return new class extends Migration
                 $table->text('description');
                 $table->timestamps();
                 //Tạo khóa chính ở migrations khác
+                $table->unsignedInteger('category_id');
+                $table->unsignedInteger('company_id');
+                $table->unsignedInteger('location_id');
+                $table->unsignedInteger('job_type_id');
             });
         }
     }

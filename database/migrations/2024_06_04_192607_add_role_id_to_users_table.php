@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('role_id')->nullable()->after('id');
+            $table->unsignedInteger('role_id')->default('3'); //1=>Admin, 2=>Nhà tuyển dụng, 3=>Ứng tuyển viên
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }

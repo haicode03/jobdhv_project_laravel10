@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Job DHV</title>
+    <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -19,6 +19,10 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    {{-- bổ sung --}}
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
 
     <!-- Libraries Stylesheet -->
     
@@ -47,7 +51,7 @@
         @include('layouts.header')
 
         <!-- Content -->
-        @yield('content')
+        @yield('contents')
 
         @include('layouts.footer')
 

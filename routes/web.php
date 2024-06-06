@@ -1,52 +1,76 @@
 <?php
-
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\JobController as AdminJobController;
-use App\Http\Controllers\AuthController;
+ 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JobsController;
-use Illuminate\Routing\Route as RoutingRoute;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\JobsController as AdminJobsController;
+use App\Http\Controllers\Admin\AdminController as AdminAdminController; 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController; 
+use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 
+use App\Http\Controllers\FrontEnd\HomeController as FrontEndHomeController;
+use App\Http\Controllers\FrontEnd\JobsController as FrontEndJobsController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
-
-//route login
-Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [AuthController::class, 'authenticate']);
-Route::get('/register', [AuthController::class, 'register']);
-Route::post('/register', [AuthController::class, 'process']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
-
-Route::get('/', function () {
-    return view('index');
+ 
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
+ 
+// Route::get('/about', [UserController::class, 'about'])->name('about');
+ 
+Route::controller(AuthController::class)->group(function () {
+    Route::get('register', 'register')->name('register');
+    Route::post('register', 'registerSave')->name('register.save');
+ 
+    Route::get('login', 'login')->name('login');
+    Route::post('login', 'loginAction')->name('login.action');
+ 
+    Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
+ 
+//Users Routes List
+Route::middleware(['auth', 'user-access:1,2,3'])->group(function () {
+    Route::get('/home', [FrontEndHomeController::class, 'index'])->name('home');
+    Route::post('/search', [FrontEndHomeController::class, 'search'])->name('search');
+    Route::get('/jobs/index', [FrontEndJobsController::class, 'index'])->name('jobs/index');
+    Route::get('/jobs/show/{id}', [FrontEndJobsController::class, 'show'])->name('jobs/show');
 
-Route::get('/about', function () {
-    return view('about');
+    // Route::get('/profile', [AuthController::class, 'userprofile'])->name('profile');
 });
+ 
+//Admin
+Route::middleware(['auth', 'user-access:1'])->group(function () {
+    Route::get('/admin/index', [AdminAdminController::class, 'index'])->name('admin/index');
+    Route::get('/admin/profile', [AdminAdminController::class, 'profilepage'])->name('admin/profile');
+ 
+    //Ngành nghề
+    Route::get('/admin/category/index', [AdminCategoryController::class, 'index'])->name('admin/category/index');
+    Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin/category/create');
+    Route::post('/admin/category/store', [AdminCategoryController::class, 'store'])->name('admin/category/store');
+    // Route::get('/admin/category/show/{id}', [AdminCategoryController::class, 'show'])->name('admin/category/show');
+    Route::get('/admin/category/edit/{id}', [AdminCategoryController::class, 'edit'])->name('admin/category/edit');
+    Route::put('/admin/category/edit/{id}', [AdminCategoryController::class, 'update'])->name('admin/category/update');
+    Route::delete('/admin/category/destroy/{id}', [AdminCategoryController::class, 'destroy'])->name('admin/category/destroy');
 
-Route::get('/category', function () {
-    return view('category');
-});
+    //Công ty
+    Route::get('/admin/company/index', [AdminCompanyController::class, 'index'])->name('admin/company/index');
+    Route::get('/admin/company/create', [AdminCompanyController::class, 'create'])->name('admin/company/create');
+    Route::post('/admin/company/store', [AdminCompanyController::class, 'store'])->name('admin/company/store');
+    // Route::get('/admin/company/show/{id}', [AdminCompanyController::class, 'show'])->name('admin/company/show');
+    Route::get('/admin/company/edit/{id}', [AdminCompanyController::class, 'edit'])->name('admin/company/edit');
+    Route::put('/admin/company/edit/{id}', [AdminCompanyController::class, 'update'])->name('admin/company/update');
+    Route::delete('/admin/company/destroy/{id}', [AdminCompanyController::class, 'destroy'])->name('admin/company/destroy');
 
-Route::resource('jobs', JobsController::class);
-
-
-Route::get('/admin/jobs', function () {
-    return view('master.jobs.index');
-});
-
-
-//admin
-Route::middleware('admin')->name('admin.')->prefix('admin2')->group(function() {
-    Route::get('/',[AdminController::class,'index'])->name('index');
-     Route::resource('/jobs',AdminJobController::class);
+    //Quản lý Jobs
+    Route::get('/admin/jobs/index', [AdminJobsController::class, 'index'])->name('admin/jobs/index');
+    Route::get('/admin/jobs/create', [AdminJobsController::class, 'create'])->name('admin/jobs/create');
+    Route::post('/admin/jobs/store', [AdminJobsController::class, 'store'])->name('admin/jobs/store');
+    // Route::get('/admin/jobs/show/{id}', [AdminJobsController::class, 'show'])->name('admin/jobs/show');
+    Route::get('/admin/jobs/edit/{id}', [AdminJobsController::class, 'edit'])->name('admin/jobs/edit');
+    Route::put('/admin/jobs/edit/{id}', [AdminJobsController::class, 'update'])->name('admin/jobs/update');
+    Route::delete('/admin/jobs/destroy/{id}', [AdminJobsController::class, 'destroy'])->name('admin/jobs/destroy');
 });

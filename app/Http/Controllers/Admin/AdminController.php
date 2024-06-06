@@ -3,15 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
+use App\Models\Role;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
-        $jobs = Job::all();
+        $user = Auth::user();
+        $role = $user->role;
 
-        return view('master.jobs.index', compact('jobs'));
+        return view('admin/index', compact('user', 'role'));
+    }
+
+    public function profilepage()
+    {
+        return view('admin/profile');
     }
 }

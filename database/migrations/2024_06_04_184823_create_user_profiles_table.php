@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
     }
@@ -30,11 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_profiles', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
-        });
-        
         Schema::dropIfExists('user_profiles');
     }
 };

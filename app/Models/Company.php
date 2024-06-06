@@ -10,6 +10,14 @@ class Company extends Model
     use HasFactory;
     protected $table = 'companies';
     protected $primaryKey = 'id';
+    public $timestamps = true;
+    // protected $dataFormat = 'h:m:s';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'website',
+    ];
     public function jobs() {
         return $this->hasMany(Job::class);
     }
