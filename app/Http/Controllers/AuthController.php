@@ -11,7 +11,6 @@ use Illuminate\Validation\ValidationException;
  
 class AuthController extends Controller
 {
- 
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -57,7 +56,7 @@ class AuthController extends Controller
  
         if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'email' => trans('auth/failed')
+                'email' => trans('Tài khoản và mật khẩu không đúng!')
             ]);
         }
  
@@ -68,8 +67,6 @@ class AuthController extends Controller
         } else {
             return redirect()->route('home');
         }
-         
-        // return redirect()->route('dashboard');
     }
  
     public function logout(Request $request)
@@ -79,10 +76,5 @@ class AuthController extends Controller
         $request->session()->invalidate();
  
         return redirect('/login');
-    }
- 
-    public function profile()
-    {
-        return view('userprofile');
     }
 }

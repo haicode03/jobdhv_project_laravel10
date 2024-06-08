@@ -60,22 +60,24 @@
 
                 <div class="">
                     <h4 class="mb-4">Ứng tuyển</h4>
-                    <form>
+                    <form action="{{ route('jobs/apply') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="job_id" value="{{ $jobs->id }}">
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control" placeholder="Nhập tên của bạn">
+                                <input type="text" name="name" class="form-control" placeholder="Nhập tên của bạn">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="email" class="form-control" placeholder="Nhập Email">
+                                <input type="email" name="email" class="form-control" placeholder="Nhập Email">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control" placeholder="Nhập số điện thoại">
+                                <input type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="file" class="form-control bg-white" placeholder="CV của bạn">
+                                <input type="file" name="cv" class="form-control bg-white" placeholder="CV của bạn">
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" rows="5" placeholder="Thư ứng tuyển"></textarea>
+                                <textarea name="cover_letter" class="form-control" rows="5" placeholder="Thư ứng tuyển"></textarea>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100" type="submit">Gửi CV</button>

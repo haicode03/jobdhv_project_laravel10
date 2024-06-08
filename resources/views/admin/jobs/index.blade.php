@@ -28,7 +28,7 @@
                                     <th class="col-1 text-center">#</th>
                                     <th class="col-3 text-center">Tên công việc</th>
                                     <th class="col-2 text-center">Mức lương</th>
-                                    <th class="col-2 text-center">Mô tả công việc</th>
+                                    <th class="col-2 text-center">Trạng thái</th>
                                     <th class="col-2 text-center">Ngày tạo</th>
                                     <th class="col-2 text-center">Chức năng</th>
                                 </tr>
@@ -43,16 +43,22 @@
                                     <tr>
                                         <td class="text-center" scope="row">{{ $i++ }}</td>
                                         <td>
-                                            <a href="" class="text-primary">{{ $rs->title }}</a>
+                                            <a href="{{ route('admin/jobs/show', $rs->id) }}" class="text-primary">{{ $rs->title }}</a>
                                         </td>
-                                        <td class="text-center">{{ $rs->email }}</td>
-                                        <td class="text-center">{{ $rs->website }}</td>
+                                        <td class="text-center">{{ $rs->wage }}</td>
+                                        <td class="text-center">
+                                            @if($rs->is_approved)
+                                                <span class="badge bg-success">Đã duyệt</span>
+                                            @else
+                                                <span class="badge bg-warning">Chưa duyệt</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{ $rs->created_at->format('d-m-Y') }}</td>
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center align-items-center">
                                             <a href="{{ route('admin/jobs/edit', $rs->id)}}" class="btn btn-primary btn-sm me-2" title="Sửa thông tin"><i class="bi bi-pencil"></i></a>
                                             
-                                            <form action="{{ route('admin/jobs/destroy', $rs->id)}}" method="POST" onsubmit="return confirm('Bạn muốn xóa công việc này?')">
+                                            <form action="{{ route('admin/jobs/destroy', $rs->id)}}" method="POST" onsubmit="return confirm('Bạn muốn xóa công việc này ?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
@@ -63,7 +69,7 @@
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td class="text-center" colspan="5">Không có công ty</td>
+                                        <td class="text-center" colspan="5">Không có công việc</td>
                                     </tr>
                                     @endif
 

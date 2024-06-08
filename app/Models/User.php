@@ -47,6 +47,10 @@ class User extends Authenticatable
 
 
 
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 
     public function profile()
     {
@@ -59,6 +63,6 @@ class User extends Authenticatable
     }
     public function resumes()
     {
-        return $this->hasMany(Resume::class);
+        return $this->hasOne(Resume::class);
     }
 }

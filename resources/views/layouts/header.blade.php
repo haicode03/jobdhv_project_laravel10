@@ -27,24 +27,28 @@
             @if (Route::has('login'))
             @auth
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                <a href="{{ url('/profile') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         @if (Auth::user()->role_id == 2)
-                        <a href="{{ url('/profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý Jobs</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý Jobs</a>
                         
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Quản lý hồ sơ ứng tuyển</a>
+                        <a href="{{ url('/member/application') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Quản lý hồ sơ ứng tuyển</a>
 
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Hồ sơ công ty</a>
 
                         <a href="{{ url('/logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-3">Đăng xuất</a>
                         @elseif (Auth::user()->role_id == 3)
-                        <a href="{{ url('/profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý CV</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý sơ yếu lí lịch</a>
                         
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Quản lý hồ sơ</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Thông báo công việc</a>
 
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Hồ sơ cá nhân</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Quản lý theo dõi</a>
 
-                        <a href="{{ url('/logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-3">Đăng xuất</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-3">Việc làm đề xuất</a>
+
+                        <a href="{{ url('/profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-4">Hồ sơ cá nhân</a>
+
+                        <a href="{{ url('/logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-5">Đăng xuất</a>
                         @endif
                     </div>
                 </div>
@@ -56,7 +60,13 @@
             @endauth
             @endif
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng tuyển<i class="fa fa-arrow-right ms-3"></i></a>
+        @if (Auth::user()->role_id == 2)
+        <a href="#" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng tuyển<i class="fa fa-arrow-right ms-3"></i></a>
+        @elseif (Auth::user()->role_id == 3)
+        <a href="#" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Ứng tuyển<i class="fa fa-arrow-right ms-3"></i></a>
+        @elseif (Auth::user()->role_id == 1)
+        <a href="{{ route('admin/index') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Trang quản trị<i class="fa fa-arrow-right ms-3"></i></a>
+        @endif
     </div>
 </nav>
 <!-- Navbar End -->

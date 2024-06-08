@@ -14,7 +14,6 @@ class Application extends Model
     // protected $dataFormat = 'h:m:s';
 
     protected $fillable = ['user_id','job_id','cover_letter'];
-
     
     public function job() {
         return $this->belongsTo(Job::class);

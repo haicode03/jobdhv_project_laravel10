@@ -21,7 +21,7 @@
                     <div class="row justify-content-start">
                         <div class="col-10 col-lg-8">
                             <h1 class="display-3 text-white animated slideInDown mb-4">Tìm công việc hoàn hảo mà bạn xứng đáng</h1>
-                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Chúng tôi ở đây và đồng hành cùng bạn.</p>
                             <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Tìm một công việc</a>
                             <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Tìm một ứng viên</a>
                         </div>
@@ -36,9 +36,9 @@
                     <div class="row justify-content-start">
                         <div class="col-10 col-lg-8">
                             <h1 class="display-3 text-white animated slideInDown mb-4">Tìm công việc khởi nghiệp tốt nhất phù hợp với bạn</h1>
-                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Tìm một công việc</a>
-                            <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Tìm một ứng viên</a>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Hơn 20.000 cơ hội nghề nghiệp cho bạn</p>
+                            <a href="#" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Tìm một công việc</a>
+                            <a href="#" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Tìm một ứng viên</a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
             @foreach ($categories as $category )
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                 <a class="cat-item rounded p-4" href="">
-                    <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                    <i class="fa fa-3x {{ $category->description }} text-primary mb-4"></i>
                     <h6 class="mb-3">{{ $category->name }}</h6>
                     <p class="mb-0">50 vị trí</p>
                 </a>
@@ -132,11 +132,11 @@
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <h1 class="mb-4">Chúng tôi giúp bạn có được công việc tốt nhất và tìm kiếm nhân tài</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                <a class="btn btn-primary py-3 px-5 mt-3" href="">Đọc thêm</a>
+                <p class="mb-4">Mang đến những góc nhìn, câu chuyện và lời khuyên từ những người trong nghề</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Theo anh chị thì điều mà các nhà tuyển dụng tìm kiếm trong thư xin việc là gì?</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Một bức thư giới thiệu xin việc nên dài bao nhiêu và nên được cấu trúc như thế nào?</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Anh chị có mẹo gì để viết thư xin việc thu hút nhà tuyển dụng không?</p>
+                <a class="btn btn-primary py-3 px-5 mt-3" href="#">Đọc thêm</a>
             </div>
         </div>
     </div>
@@ -169,16 +169,16 @@
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <!-- Hiển thị công việc nổi bật -->
-                    @foreach($jobs as $job)
+                    @foreach($jobs as $index => $job)
                         @if($job->job_type_id == 1)
                             @php
                                 $expirationDate = $job->created_at->addDays(30);
                                 $daysRemaining = now()->diffInDays($expirationDate);
                             @endphp
-                            <div class="job-item p-4 mb-4">
+                            <div class="job-item p-4 mb-4 {{ $index >= 4 ? 'd-none' : '' }}">
                                 <div class="row g-4">
                                     <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid border rounded" src="img/{{ asset($job->image_path) }}" alt="" style="width: 80px; height: 80px;">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ asset('img/' . $job->image_path) }}" alt="" style="width: 80px; height: 80px;">
                                         <div class="text-start ps-4">
                                             <h5 class="mb-3">{{ $job->title }} <small style="font-size: 10px" class="text-success">(Hết hạn sau: {{ $daysRemaining }} ngày)</small></h5>
                                             <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location->city }}</span>
@@ -189,7 +189,7 @@
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
                                             <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
-                                            <a class="btn btn-primary" href="">Xem ngay</a>
+                                            <a class="btn btn-primary" href="{{ route('jobs/show', $job->id) }}">Xem ngay</a>
                                         </div>
                                         <small class="text-truncate text-success"><i class="far fa-calendar-alt text-primary me-2"></i>Đăng ngày: {{ $job->created_at->format('d/m/Y') }}</small>
                                     </div>
@@ -197,7 +197,7 @@
                             </div>
                         @endif
                     @endforeach
-                    <a class="btn btn-primary py-3 px-5" href="">Hiển thị thêm</a>
+                    <button id="show-more" class="btn btn-primary py-3 px-5">Hiển thị thêm</button>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
                     <!-- Hiển thị công việc full time -->
@@ -221,7 +221,7 @@
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
                                             <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
-                                            <a class="btn btn-primary" href="">Xem ngay</a>
+                                            <a class="btn btn-primary" href="{{ route('jobs/show', $job->id) }}">Xem ngay</a>
                                         </div>
                                         <small class="text-truncate text-success"><i class="far fa-calendar-alt text-primary me-2"></i>Đăng ngày: {{ $job->created_at->format('d/m/Y') }}</small>
                                     </div>
@@ -253,7 +253,7 @@
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
                                             <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
-                                            <a class="btn btn-primary" href="">Xem ngay</a>
+                                            <a class="btn btn-primary" href="{{ route('jobs/show', $job->id) }}">Xem ngay</a>
                                         </div>
                                         <small class="text-truncate text-success"><i class="far fa-calendar-alt text-primary me-2"></i>Đăng ngày: {{ $job->created_at->format('d/m/Y') }}</small>
                                     </div>
@@ -278,45 +278,45 @@
         <div class="owl-carousel testimonial-carousel">
             <div class="testimonial-item bg-light rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>Chất lượng phục vụ rất tốt. Xin cảm ơn.</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <small>Profession</small>
+                        <h5 class="mb-1">Hai Hoang</h5>
+                        <small>Dev - FrontEnd</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-light rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>Tôi rất hài lòng về chất lượng!</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <small>Profession</small>
+                        <h5 class="mb-1">Nga Ho</h5>
+                        <small>Tester</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-light rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>Hỗ trợ nhiệt tình.</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <small>Profession</small>
+                        <h5 class="mb-1">Cảm ơn bạn.</h5>
+                        <small>FullStack - Dev</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-light rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>Bạn có thể giúp tôi lần nữa không?</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-4.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <small>Profession</small>
+                        <h5 class="mb-1">Son Hoang</h5>
+                        <small>Deginer</small>
                     </div>
                 </div>
             </div>
@@ -324,5 +324,25 @@
     </div>
 </div>
 <!-- Testimonial End -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const showMoreButton = document.getElementById('show-more');
+        let currentIndex = 4;
+
+        showMoreButton.addEventListener('click', function () {
+            const hiddenJobs = document.querySelectorAll('.job-item.d-none');
+            for (let i = 0; i < 4; i++) {
+                if (hiddenJobs[i]) {
+                    hiddenJobs[i].classList.remove('d-none');
+                } else {
+                    showMoreButton.style.display = 'none';
+                    break;
+                }
+            }
+            currentIndex += 4;
+        });
+    });
+</script
 
 @endsection

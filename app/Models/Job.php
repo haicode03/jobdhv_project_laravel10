@@ -18,6 +18,7 @@ class Job extends Model
         'title',
         'wage',
         'description',
+        'is_approved',
         'image_path',
         'category_id',
         'company_id',

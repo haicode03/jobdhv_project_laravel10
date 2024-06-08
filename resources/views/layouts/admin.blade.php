@@ -180,12 +180,12 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="ri-apps-fill"></i><span>Quản lý nhà tuyển dụng</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="ri-apps-fill"></i><span>Quản lý hồ sơ ứng tuyển</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Danh sách nhà tuyển dụng</span>
+              <i class="bi bi-circle"></i><span>Danh sách hồ sơ ứng tuyển</span>
             </a>
           </li>
           <li>
@@ -199,7 +199,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Quản lý nhà tuyển dụng -->
+      </li><!-- End Quản lý hồ sơ ứng tuyển -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -207,18 +207,18 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>Chart.js</span>
+            <a href="{{ route('admin/users/index') }}">
+              <i class="bi bi-circle"></i><span>Danh sách người dùng</span>
             </a>
           </li>
           <li>
-            <a href="charts-apexcharts.html">
-              <i class="bi bi-circle"></i><span>ApexCharts</span>
+            <a href="{{ route('admin/users/create') }}">
+              <i class="bi bi-circle"></i><span>Thêm người dùng</span>
             </a>
           </li>
           <li>
-            <a href="charts-echarts.html">
-              <i class="bi bi-circle"></i><span>ECharts</span>
+            <a href="{{ route('admin/users/edit', $user->id) }}">
+              <i class="bi bi-circle"></i><span>Sửa thông tin</span>
             </a>
           </li>
         </ul>

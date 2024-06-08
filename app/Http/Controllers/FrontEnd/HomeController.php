@@ -21,6 +21,7 @@ class HomeController extends Controller
         $jobs = Job::all();
         $categories = Category::take(8)->get();
         $locations = Location::all();
+        $jobs = Job::where('is_approved', true)->get();
 
         return view('home', [
             'categories' => $categories,
@@ -30,6 +31,7 @@ class HomeController extends Controller
     ]);
     }
 
+    //Luồng tìm kiếm công việc
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
@@ -42,17 +44,20 @@ class HomeController extends Controller
             $query->where('title', 'LIKE', "%{$keyword}%");
         }
 
-        if ($category) {
+        if ($category && $category !== 'Ngành nghề') {
             $query->where('category_id', $category);
         }
 
-        if ($location) {
+        if ($location && $location !== 'Nơi làm việc') {
             $query->where('location_id', $location);
         }
 
         $jobs = $query->get();
+        $job_types = Job_type::all();
+        $categories = Category::all();
+        $locations = Location::all();
 
-        return view('search_results', compact('jobs'));
+        return view('search_results', compact('jobs', 'categories', 'locations', 'job_types'));
     }
 
 }
