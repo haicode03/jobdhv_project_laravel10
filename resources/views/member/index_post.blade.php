@@ -1,6 +1,6 @@
 @extends('layouts.app')
  
-@section('title', 'Hồ sơ ứng tuyển')
+@section('title', 'Danh sách bài đăng')
  
 @section('contents')
 
@@ -10,7 +10,7 @@
         <h1 class="display-3 text-white mb-3 animated slideInDown">{{ Auth::user()->name }}</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb text-uppercase">
-                <li class="breadcrumb-item"><a href="#">User</a></li>
+                <li class="breadcrumb-item"><a href="#">Nhà tuyển dụng</a></li>
             </ol>
         </nav>
     </div>
@@ -26,7 +26,7 @@
                 <a class="nav-item nav-link" href="{{ url('/logout') }}">Đăng xuất</a>
                 @elseif (Auth::user()->role_id == 3)
                 <a style="padding-left: 30px"class="nav-item nav-link" href="#">Quản lý sơ yếu lý lịch</a>
-                <a class="nav-item nav-link" href="#">Thông báo công việc</a>
+                <a class="nav-item nav-link" href="{{ url('/member/notifications') }}">Thông báo công việc</a>
                 <a class="nav-item nav-link" href="#">Quản lý theo dõi</a>
                 <a class="nav-item nav-link" href="#">Việc làm đề xuất</a>
                 <a class="nav-item nav-link" href="#">Đăng xuất</a>
@@ -37,15 +37,21 @@
 
     <div class="container content">
         <div class="d-flex justify-content-between mb-3">
-            <div class="pagetitle">
-                <h2>Danh sách hồ sơ ứng tuyển</h2>
+            <div style="display: flex;align-items: center;justify-content: space-between;">
+                <h3>Danh sách bài đăng</h3>
+                <p>
+                    <a class="btn btn-success" href="{{ route('member/create_post') }}">
+                        <i class="bi bi-file-earmark-text">Viết bài đăng</i>
+                    </a>
+                </p>
             </div>
+            
             <div>
-                <label for="action">Hoạt động:</label>
+                <label for="action">Thuộc tính:</label>
                 <select id="action" class="form-select d-inline-block w-auto">
-                    <option>-Tất cả-</option>
-                    <option>Đã phê duyệt</option>
-                    <option>Từ chối</option>
+                    <option>-Nổi bật-</option>
+                    <option>Full-time</option>
+                    <option>Part-time</option>
                 </select>
                 <button class="btn btn-success">Tìm</button>
             </div>
@@ -54,42 +60,31 @@
             <thead class="table-header">
                 <tr>
                     <th><input type="checkbox"></th>
-                    <th>Ứng viên</th>
-                    <th>Công việc ứng tuyển</th>
-                    <th>Tin nhắn</th>
-                    <th>Tập tin đính kèm</th>
-                    <th>Ngày ứng tuyển</th>
+                    <th>Tên công việc</th>
+                    <th>Mức lương</th>
+                    <th>Vị trí ứng tuyển</th>
+                    <th>Nơi làm việc</th>
+                    <th>Ngày đăng</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($applications as $application)
+                @forelse ($jobs as $job)
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td>{{ $application->user->name }}</td>
-                        <td>{{ $application->job->title }}</td>
-                        <td>{{ $application->cover_letter }}</td>
+                        <td>{{ $job->title }}</td>
+                        <td>{{ $job->wage }}</td>
+                        <td>Vị trí</td>
+                        <td>{{ $job->location->city }}</td>
+                        <td>{{ $job->created_at->format('d-m-Y') }}</td>
                         <td>
-                            @if ($application->user->resume->isNotEmpty())
-                                @foreach ($application->user->resume as $resume)
-                                    <a href="{{ asset('../cv/' . $resume->file_path) }}">Xem</a>
-                                @endforeach
-                            @else
-                                No resume available
-                            @endif
-                        </td>
-                        <td>{{ $application->created_at->format('d-m-Y') }}</td>
-                        <td>
-                            <form action="{{ route('member/applications/approve', $application->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Duyệt</button>
-                            </form>
-                            <button class="btn btn-danger">Từ chối</button>
+                            <button class="btn btn-primary">Sửa</button>
+                            <button class="btn btn-danger">Xóa</button>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="9" class="text-center">Không có đơn ứng tuyển nào</td>
+                        <td colspan="9" class="text-center">Không có bài đăng nào/td>
                     </tr>
                 @endforelse
             </tbody>

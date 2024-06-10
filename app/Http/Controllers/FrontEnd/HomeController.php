@@ -18,7 +18,6 @@ class HomeController extends Controller
     public function index()
     {
         $job_types = Job_type::all();
-        $jobs = Job::all();
         $categories = Category::take(8)->get();
         $locations = Location::all();
         $jobs = Job::where('is_approved', true)->get();
@@ -31,7 +30,6 @@ class HomeController extends Controller
     ]);
     }
 
-    //Luồng tìm kiếm công việc
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');

@@ -47,22 +47,22 @@ class User extends Authenticatable
 
 
 
-    public function applications()
+    public function application()
     {
         return $this->hasMany(Application::class);
     }
 
-    public function profile()
+    public function user_profile()
     {
-        return $this->hasOne(User_Profile::class);
+        return $this->hasOne(User_profile::class);
     }
 
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
-    public function resumes()
+    public function resume()
     {
-        return $this->hasOne(Resume::class);
+        return $this->hasMany(Resume::class);
     }
 }

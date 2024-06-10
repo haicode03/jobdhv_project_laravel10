@@ -26,7 +26,7 @@
 
                 @if($detailJob)
                     <h3>Chi tiết công việc</h3>
-                    <p><strong>Trách nhiệm công việc:</strong> {{ $detailJob->responsibility }}</p>
+                    <p><strong>Trách nhiệm công việc:</strong>{{ isset($detailJob->responsibility) ? $detailJob->responsibility : '' }}</p>
                     <p><strong>Yêu cầu kinh nghiệm, trình độ:</strong> {{ $detailJob->level }}</p>
                     <p><strong>Tóm tắt công việc:</strong> {{ $detailJob->job_summery }}</p>
                 @else

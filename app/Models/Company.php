@@ -18,7 +18,7 @@ class Company extends Model
         'email',
         'website',
     ];
-    public function jobs() {
+    public function job() {
         return $this->hasMany(Job::class);
     }
 }

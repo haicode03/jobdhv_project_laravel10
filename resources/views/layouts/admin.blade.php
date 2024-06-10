@@ -134,18 +134,15 @@
               <i class="bi bi-circle"></i><span>Danh sách ngành nghề</span>
             </a>
           </li>
-          <li>
-            <a href="{{ route('admin/company/index') }}">
-              <i class="bi bi-circle"></i><span>Danh sách công ty</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Danh sách kĩ năng</span>
-            </a>
-          </li>
         </ul>
       </li><!-- Quản lý ngành nghề -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('admin/company/index') }}">
+          <i class="bi bi-gem"></i>
+          <span>Quản lý công ty</span>
+        </a>
+      </li><!-- End Quản lý công ty -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -184,18 +181,8 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{ route('admin/applications/index') }}">
               <i class="bi bi-circle"></i><span>Danh sách hồ sơ ứng tuyển</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
             </a>
           </li>
         </ul>
@@ -217,7 +204,7 @@
             </a>
           </li>
           <li>
-            <a href="{{ route('admin/users/edit', $user->id) }}">
+            <a href="#">
               <i class="bi bi-circle"></i><span>Sửa thông tin</span>
             </a>
           </li>
@@ -225,7 +212,14 @@
       </li><!-- End Quản lý người dùng -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-credit-card-2-front-fill"></i>
+          <span>Thống kê & báo cáo</span>
+        </a>
+      </li><!-- End Thống kê báo cáo-->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
           <i class="ri-settings-3-line"></i>
           <span>Quản lý hệ thống</span>
         </a>

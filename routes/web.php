@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController as AdminAdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController; 
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ApplicationsController as AdminApplicationController;
 
 use App\Http\Controllers\FrontEnd\HomeController as FrontEndHomeController;
 use App\Http\Controllers\FrontEnd\JobsController as FrontEndJobsController;
@@ -33,6 +34,7 @@ Route::get('/feedback', function () {
 });
 
 
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
@@ -43,7 +45,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-
 //Users Routes List
 Route::middleware(['auth', 'user-access:1,2,3'])->group(function () {
     Route::get('/home', [FrontEndHomeController::class, 'index'])->name('home');
@@ -53,7 +54,15 @@ Route::middleware(['auth', 'user-access:1,2,3'])->group(function () {
     Route::post('/jobs/apply', [FrontEndJobsController::class, 'apply'])->name('jobs/apply');
 
     Route::get('/member/application', [FrontEndMemberController::class, 'application'])->name('member/application');
-    Route::get('/member/showResume/{user_id}', [FrontEndMemberController::class, 'showResume'])->name('member/showResume');
+    Route::get('/member/showCV', [FrontEndMemberController::class, 'showCV'])->name('member/showCV');
+    Route::get('/member/profile_candidate', [FrontEndMemberController::class, 'profile_candidate'])->name('member/profile_candidate');
+    Route::put('/member/profile_candidate/{id}', [FrontEndMemberController::class, 'update'])->name('member/profile_candidate');
+    Route::get('/member/index_post', [FrontEndMemberController::class, 'index_post'])->name('member/index_post');
+    Route::get('/member/create_post', [FrontEndMemberController::class, 'create_post'])->name('member/create_post');
+    Route::post('/member/store_post', [FrontEndMemberController::class, 'store_post'])->name('member/store_post');
+    Route::get('/member/notifications', [FrontEndMemberController::class, 'notifications'])->name('member/notifications');
+
+    Route::post('/member/applications/approve/{id}', [AdminApplicationController::class, 'approve'])->name('member/applications/approve');
 });
  
 //Admin
@@ -88,6 +97,10 @@ Route::middleware(['auth', 'user-access:1'])->group(function () {
     Route::get('/admin/jobs/edit/{id}', [AdminJobsController::class, 'edit'])->name('admin/jobs/edit');
     Route::put('/admin/jobs/edit/{id}', [AdminJobsController::class, 'update'])->name('admin/jobs/update');
     Route::delete('/admin/jobs/destroy/{id}', [AdminJobsController::class, 'destroy'])->name('admin/jobs/destroy');
+
+    //Quản lý hồ sơ ứng tuyển
+    Route::get('/admin/applications/index', [AdminApplicationController::class, 'index'])->name('admin/applications/index');
+    Route::delete('/admin/applications/destroy/{id}', [AdminApplicationController::class, 'destroy'])->name('admin/applications/destroy');
 
     //Quản lý người dùng
     Route::get('/admin/users/index', [AdminUserController::class, 'index'])->name('admin/users/index');

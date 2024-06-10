@@ -25,6 +25,11 @@
     <div class="container">
         <div class="row gy-5 gx-4">
             <div class="col-lg-8">
+                @if(Session::has('success'))
+                <div style="color: #155724; background-color: #cdf0d5; border-color: #c3e6cb;padding: 10px; margin-bottom: 20px; text-align:center;" class="p-2 mb-2" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <div class="d-flex align-items-center mb-5">
                     <img class="flex-shrink-0 img-fluid border rounded" src="/img/{{ asset($jobs->image_path) }}" alt="" style="width: 80px; height: 80px;">
                     <div class="text-start ps-4">
@@ -41,20 +46,32 @@
                     <h4 class="mb-3">Trách nhiệm</h4>
                     <ul class="list-unstyled">
                         @php
-                            $responsibilitys = explode('.', $jobs->detail_job->responsibility);
+                            if (!empty($jobs->detail_job->responsibility)) {
+                                $responsibilitys = explode('.', $jobs->detail_job->responsibility);
+                            }else {}
                         @endphp
+                        @if(!empty($responsibilitys))
                         @foreach($responsibilitys as $responsibility)
                             <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $responsibility }}</li>
                         @endforeach
+                        @else
+                            <p>Không có trách nhiệm nào được liệt kê.</p>
+                        @endif
                     </ul>
                     <h4 class="mb-3">Trình độ</h4>
                     <ul class="list-unstyled">
                         @php
-                            $levels = explode('.', $jobs->detail_job->level);
+                            if (!empty($jobs->detail_job->level)) {
+                                $levels = explode('.', $jobs->detail_job->level);
+                            }else {}
                         @endphp
+                        @if(!empty($levels))
                         @foreach($levels as $level)
                             <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $level }}</li>
                         @endforeach
+                        @else
+                            <p>Không có trình độ nào được liệt kê.</p>
+                        @endif
                     </ul>
                 </div>
 
@@ -91,17 +108,21 @@
                 <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                     <h4 class="mb-4">Tóm tắt công việc</h4>
                     @php
-                        $job_summerys = explode('.', $jobs->detail_job->job_summery);
-                    @endphp
-                    <ul class="list-unstyled">
+                        if (!empty($jobs->detail_job->job_summery)) {
+                            $job_summerys = explode('.', $jobs->detail_job->job_summery);
+                        }else {}
+                        @endphp
+                        @if(!empty($job_summerys))
                         @foreach($job_summerys as $job_summery)
                             <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $job_summery }}</li>
                         @endforeach
-                    </ul>
+                        @else
+                            <p>Không có thông tin.</p>
+                        @endif
                 </div>
                 <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
-                    <h4 class="mb-4">Chí tiết công ty</h4>
-                    <p class="m-0">Ipsum dolor ipsum accusam stet et et diam dolores, sed rebum sadipscing elitr vero dolores. Lorem dolore elitr justo et no gubergren sadipscing, ipsum et takimata aliquyam et rebum est ipsum lorem diam. Et lorem magna eirmod est et et sanctus et, kasd clita labore.</p>
+                    <h4 class="mb-4">Chi tiết công ty</h4>
+                    <p class="m-0">Công ty TNHH.</p>
                 </div>
             </div>
         </div>

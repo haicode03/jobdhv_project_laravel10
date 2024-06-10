@@ -27,28 +27,26 @@
             @if (Route::has('login'))
             @auth
             <div class="nav-item dropdown">
-                <a href="{{ url('/profile') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         @if (Auth::user()->role_id == 2)
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý Jobs</a>
+                        <a href="{{ url('/member/index_post') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý Jobs</a>
                         
                         <a href="{{ url('/member/application') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Quản lý hồ sơ ứng tuyển</a>
 
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Hồ sơ công ty</a>
+                        <a href="{{ url('/member/profile_company') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Hồ sơ công ty</a>
 
                         <a href="{{ url('/logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-3">Đăng xuất</a>
                         @elseif (Auth::user()->role_id == 3)
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý sơ yếu lí lịch</a>
+                        <a href="{{ url('/member/profile_candidate') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Quản lý sơ yếu lí lịch</a>
                         
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Thông báo công việc</a>
+                        <a href="{{ url('/member/notifications') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Thông báo công việc</a>
 
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Quản lý theo dõi</a>
 
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-3">Việc làm đề xuất</a>
 
-                        <a href="{{ url('/profile') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-4">Hồ sơ cá nhân</a>
-
-                        <a href="{{ url('/logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-5">Đăng xuất</a>
+                        <a href="{{ url('/logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-4">Đăng xuất</a>
                         @endif
                     </div>
                 </div>

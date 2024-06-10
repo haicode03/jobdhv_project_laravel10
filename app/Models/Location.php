@@ -10,7 +10,7 @@ class Location extends Model
     use HasFactory;
     protected $table = 'locations';
     protected $primaryKey = 'id';
-    public function jobs() {
+    public function job() {
         return $this->hasMany(Job::class);
     }
 }

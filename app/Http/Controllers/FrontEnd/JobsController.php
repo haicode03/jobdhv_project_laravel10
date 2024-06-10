@@ -18,9 +18,9 @@ class JobsController extends Controller
 {
     public function index() {
         $job_types = Job_type::all();
-        $jobs = Job::all();
         $categories = Category::take(8)->get();
         $locations = Location::all();
+        $jobs = Job::where('is_approved', true)->get();
 
         return view('jobs/index', 
         [
@@ -53,10 +53,8 @@ class JobsController extends Controller
             'cover_letter' => 'nullable|string',
         ]);
 
-        // Save the application to the database
         $user = auth()->user();
 
-        // Create a new resume record if it doesn't exist
         $resume = Resume::firstOrNew(['user_id' => $user->id]);
         if ($request->hasFile('cv')) {
             $cvName = time().'.'.$request->cv->extension();
@@ -65,7 +63,6 @@ class JobsController extends Controller
             $resume->save();
         }
 
-        // Create a new application record
         $application = new Application();
         $application->user_id = $user->id;
         $application->job_id = $request->job_id;
